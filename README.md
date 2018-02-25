@@ -25,7 +25,7 @@
 
 <p>For map's customizing and setting you need to use simple JS-object with name "smOptions". You can include this object to any part of your code at page. If you didn't choose any option - library will use default options for map's building.</p>
 
-<h4>2.1. Setting of main parameters</h4>
+<h4>2.2. Setting of main parameters</h4>
 
 <p>Main parameters include geographical coordinates of map's center, working area, minimum, maximum and initial zoom.</p>
 
@@ -79,4 +79,56 @@
 
 <p>smOptions.geolocation.sizePoint - set "Geolocation" point's size. Format: array with poins's width and height, for example, [47, 52].</p>
 
-<p>smOptions.geolocation.offsetPoint -  - set "Geolocation" point's offset. Format: array with poins's offsets for width and height, for example, [-24, -52].</p>
+<p>smOptions.geolocation.offsetPoint - set "Geolocation" point's offset. Format: array with poins's offsets for width and height, for example, [-24, -52].</p>
+
+<h4>2.3. Setting of map's points</h4>
+
+<h5>2.3.1.  Clustering</h5>
+
+<p>smOptions.cluster - make possible to unite point in clusters. Format: boolean.</p>
+
+<h5>2.3.1.  Point's adding</h5>
+
+<p>smOptions.data will add objects' array to map. Every array's object can have next parameters for presenting of point and baloon:</p>
+
+<p>smOptions.data[i].coordinates - set geographical coordinates of point's center. Format: array with latitude and longitude, for example, [34.4481, -119.2429].</p>
+
+<p>smOptions.data[i].html - text or HTML for point's baloon. Format: string.</p>
+
+<p>smOptions.data[i].title - text or HTML for point's baloon. Format: string.</p>
+
+<p>smOptions.data[i].icon - set point's template. Format: string URL-link to element.</p>
+
+<p>smOptions.data[i].sizePoint - set point's size. Format: array with poins's width and height, for example, [47, 52].</p>
+
+<p>smOptions.data[i].offsetPoint - set point's offset. Format: array with poins's offsets for width and height, for example, [-24, -52].</p>
+
+<p>smOptions.data[i].group - set group for point if it necessary. Format: string or number.</p>
+
+<h4>2.4. Multiroute's building</h4>
+
+<p>smOptions.router will provide settings for multiroute's building from A to B. Format: object with selected parameters:</p>
+
+<p>smOptions.router.startPoint - set start point. Format:  array with latitude and longitude, for example, [34.4481, -119.2429] or string with location's name.</p>
+
+<p>smOptions.router.endPoint - set end point. Format:  array with latitude and longitude, for example, [34.4481, -119.2429] or string with location's name.</p>
+
+<p>smOptions.router.maxWays - maximum available number of ways from A to B. Format: number.</p>
+
+<p>smOptions.router.refPoints - set transit points on current route. Format: multidimensional array with points' coordinates, for example, [[37.771951, -116.637113], [39.102605, -119.735258]].</p>
+
+<h4>2.5. Road traffic</h4>
+
+<p>There is a mode with current road situation for  places in Russia, Belarus, Kazakhstan and Turkey.</p>
+
+<p>smOptions.traffic - turn on (or off) layout with current road traffic. Format: boolean.</p>
+
+<h4>3. Integration with HTML</h4>
+
+<p>Every link can have additional attributes for simple work with map's actions and map's using.</p>
+
+<p>sm-point - attribute for map's moving to choosen point from smOptions.data. Attribute's value is number with item's index in smOptions.data. For example, sm-point="0".</p>
+
+<p>sm-move - attribute for map's moving to choosen map's coordinates.  Attribute's value is geographic coordinates (latitude and longitude). For example, sm-move="0, 0".</p>
+
+<p>sm-show - attribute for setting of group's visibility. It's show and hide choosen group of points by click. Group's name is parameter from smOptions.data[i].group for current point (points). If attribute don't have any value link's click will show all points from smOptions.data.</p>
