@@ -4,8 +4,6 @@
 
 <p>This library was not created for flexible setting. This project include the most popular Yandex.Maps' abilities and provide you new experience of work with it.</p>
 
-<p>Documentation and demo in Russian: <a href="http://makstakeda.ru/stagimap" target="_blank">makstakeda.ru/stagimap</a></p>
-
 <h5>Main abilities of library:</h5>
 
 <p>• Map's customizing and including with few rows
@@ -21,11 +19,7 @@
 
 <h3>1. Starting to work</h3>
 
-<p>You need to download library and include that JS-file to your page. Also you must choose language of map's localization in RFC-3066 format. You don't need to include basic library of Yandex.Maps - this library are included in StagiMap. For example,</p>
-
-<pre><script src=".../stagimap.js?lang=en"></script></pre>
-
-<p>Map will be initialize in DIV with id="stagimap" with setted width and height.</p>
+<p>You need to download library and include that JS-file to your page. Also you need to choose language of map's localization in RFC-3066 format. For example,</p>
 
 <h3>2. Map's settings</h3>
 
