@@ -58,9 +58,8 @@ function init() {
     '<img class="my-button__img" src="{{ data.image }}" width="100%">',
     '</div>'
   ].join(''));
-// Add zoom buttons
   (function addZoomButtons() {
-    let position = smOptions.zoom || {top: 320, left: 25};
+    let position = smOptions.zoom || {top: 80, left: 25};
     if (smOptions.zoomButtons) {
       let zoomInControl = new ymaps.control.Button({
             data: {
@@ -101,7 +100,7 @@ function init() {
       let geolocationControl = new ymaps.control.GeolocationControl({
             data: {
                 image: smOptions.geolocation.geoButton || urlButton,
-                title: smOptions.geolocation.geoText || 'Check my location',
+                title: smOptions.geolocation.geoText || 'Текущее местоположение',
                 style: smOptions.geolocation.geoStyle || ''
             },
             options: {
@@ -129,14 +128,12 @@ function init() {
         locationPlacemark.geometry.setCoordinates(position);
         myMap.panTo(position);
       });
-      myMap.controls.add(geolocationControl, {position: smOptions.geolocation.geoPosition ||  {top: 250, left: 10}});
+      myMap.controls.add(geolocationControl, {position: smOptions.geolocation.geoPosition ||  {top: 10, left: 10}});
     };
   })();
-// Add points from array to map
   let section;
   (function addPoints() {
-
-    if (smOptions.cluster) {
+    if (smOptions.cluster === true) {
       section = new ymaps.Clusterer({
         clusterBalloonContentLayoutWidth: 400,
         clusterBalloonContentLayoutHeight: 300,
@@ -179,7 +176,6 @@ function init() {
       myMap.geoObjects.add(section);
     };
   })();
-// Show and hide points on the map
   let showPoints = document.querySelectorAll('a[sm-show]');
   for (var i = 0; i < showPoints.length; i++) {
     showPoints[i].addEventListener('click', function(event) {
@@ -215,9 +211,9 @@ function init() {
               clusterCaption: smOptions.data[i].title
             }, {
               iconLayout: 'default#image',
-              iconImageHref: smOptions.data[i].iconImageHref || iconPlacemark,
-              iconImageSize: smOptions.data[i].iconImageSize || [42, 46],
-              iconImageOffset: smOptions.data[i].iconImageOffset || [-21, -46],
+              iconImageHref: smOptions.data[i].icon || iconPlacemark,
+              iconImageSize: smOptions.data[i].sizePoint || [42, 46],
+              iconImageOffset: smOptions.data[i].offsetPoint || [-21, -46],
               balloonPanelMaxMapArea: 0
             }
           ));
@@ -232,9 +228,9 @@ function init() {
                 clusterCaption: smOptions.data[i].title
               }, {
                 iconLayout: 'default#image',
-                iconImageHref: smOptions.data[i].iconImageHref || iconPlacemark,
-                iconImageSize: smOptions.data[i].iconImageSize || [42, 46],
-                iconImageOffset: smOptions.data[i].iconImageOffset || [-21, -46],
+                iconImageHref: smOptions.data[i].icon || iconPlacemark,
+                iconImageSize: smOptions.data[i].sizePoint || [42, 46],
+                iconImageOffset: smOptions.data[i].offsetPoint || [-21, -46],
                 balloonPanelMaxMapArea: 0
               }
             ));
@@ -249,7 +245,7 @@ function init() {
   (function routeBuilder() {
     if (smOptions.router) {
       let multiRoute = new ymaps.multiRouter.MultiRoute({
-        referencePoints:[[38.597640, -121.476158],[34.084880, -117.279381]],
+        referencePoints:[smOptions.router.startPoint,smOptions.router.endPoint],
         params:{
           results: smOptions.router.maxWays || 2
         }
@@ -268,7 +264,7 @@ function init() {
     };
   })();
   (function showTraffic() {
-    if (smOptions.traffic) {
+    if (smOptions.traffic === true) {
       new ymaps.traffic.provider.Actual({}, { infoLayerShown: true }).setMap(myMap);
     };
   })();
@@ -276,6 +272,7 @@ function init() {
     let ver = '.'+document.getElementById('stagimap').children[0].getAttribute('class').slice(0, -4);
     let styles = document.createElement('style')
     styles.innerHTML = '.ym-api-button {width: 60px; height: 60px; border-radius: 30px; box-shadow: 0 2px 6px 0 rgba(0,0,0,.2); border-box; cursor: pointer; overflow: hidden;}';
+    styles.innerHTML +=ver+'-default-cluster {font-weight: bold; color: ffffff; font-size: 16px;}';
     document.body.appendChild(styles);
   })();
   let movelinks = document.querySelectorAll('a[sm-move]');
@@ -294,11 +291,11 @@ function init() {
     });
   };
   ymaps.layout.storage.add();
-  console.log(document.getElementById('stagimap').children[0].getAttribute('class').slice(0, -4) + '--' + myMap.getZoom());
 };
 window.onload = function() {
   ymaps.ready(init);
 };
 
 // StagiMap 0.1
-// makstakeda.ru © 2018
+// makstakeda.ru
+// © Yandex.Maps User Agreement https://yandex.ru/legal/maps_termsofuse/?lang=en
