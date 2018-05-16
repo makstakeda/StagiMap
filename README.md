@@ -21,7 +21,7 @@
 
 <h3>1. Starting to work</h3>
 
-<p>You need to download library and include that JS-file to your page. Also you must choose language of map's localization in RFC-3066 format. You don't need to include basic library of Yandex.Maps - this library are included in StagiMap. For example,</p>
+<p>You need to download library and include that JS-file to your page. Also you must choose language of map's localization in RFC-3066 format (Get Information about supported localizations on <a href="https://tech.yandex.com/maps/doc/intro/concepts/localization-docpage/" target="_blank">tech.yandex.com/maps/doc/intro/concepts/localization-docpage</a>). You don't need to include basic library of Yandex.Maps - this library are included in StagiMap. For example,</p>
 
 <pre><script src=".../stagimap.js?lang=en"></script></pre>
 
