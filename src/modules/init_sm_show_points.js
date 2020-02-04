@@ -1,3 +1,7 @@
+/*global ymaps*/
+
+import { navigationIcons } from './navigation_icons';
+
 export const initSmShowPoints = (map, options) => {
   const showPoints = document.querySelectorAll('a[sm-show]');
   for (var i = 0; i < showPoints.length; i++) {
@@ -19,7 +23,7 @@ export const initSmShowPoints = (map, options) => {
           clusterDisableClickZoom: true,
           clusterOpenBalloonOnClick: true,
           clusterIcons: [{
-            href: iconCluster,
+            href: navigationIcons.iconCluster,
             size: [56, 56],
             offset: [-28, -56]
           }]
@@ -54,7 +58,7 @@ export const initSmShowPoints = (map, options) => {
         return
       };
 
-      if (prop == '') {
+      if (prop === '') {
         for (let i = 0; i < options.data.length; i++) {
           section.add(new ymaps.Placemark(
             options.data[i].coordinates,
@@ -64,7 +68,7 @@ export const initSmShowPoints = (map, options) => {
               hintContent: options.data[i].title
             }, {
               iconLayout: 'default#image',
-              iconImageHref: options.data[i].icon || iconPlacemark,
+              iconImageHref: options.data[i].icon || navigationIcons.iconPlacemark,
               iconImageSize: options.data[i].sizePoint || [42, 46],
               iconImageOffset: options.data[i].offsetPoint || [-21, -46],
               balloonPanelMaxMapArea: 0
@@ -73,7 +77,7 @@ export const initSmShowPoints = (map, options) => {
         };
       } else {
         for (let i = 0; i < options.data.length; i++) {
-          if (prop == options.data[i].group) {
+          if (prop === options.data[i].group) {
             section.add(new ymaps.Placemark(
               options.data[i].coordinates,
               {
@@ -82,7 +86,7 @@ export const initSmShowPoints = (map, options) => {
                 hintContent: options.data[i].title
               }, {
                 iconLayout: 'default#image',
-                iconImageHref: options.data[i].icon || iconPlacemark,
+                iconImageHref: options.data[i].icon || navigationIcons.iconPlacemark,
                 iconImageSize: options.data[i].sizePoint || [42, 46],
                 iconImageOffset: options.data[i].offsetPoint || [-21, -46],
                 balloonPanelMaxMapArea: 0

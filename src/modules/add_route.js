@@ -1,3 +1,5 @@
+/*global ymaps*/
+
 export const addRoute = (map, options) => {
   const multiRoute = new ymaps.multiRouter.MultiRoute(
     {

@@ -1,4 +1,8 @@
-export const addGeoButton = (map, options) => {
+/*global ymaps*/
+
+import { navigationIcons } from './navigation_icons';
+
+export const addGeoButton = (map, options, locale) => {
   if (options.geolocation) {
     const ButtonLayout = ymaps.templateLayoutFactory.createClass(`
       <div title="{{data.title}}" class="ym-api-button" style="{{data.style}}">
@@ -8,8 +12,8 @@ export const addGeoButton = (map, options) => {
 
     const geolocationControl = new ymaps.control.GeolocationControl({
       data: {
-        image: options.geolocation.geoButton || urlButton,
-        title: options.geolocation.geoText || localeStagiMap.geolocation,
+        image: options.geolocation.geoButton || navigationIcons.urlButton,
+        title: options.geolocation.geoText || locale.geolocation,
         style: options.geolocation.geoStyle || ''
       },
       options: {
@@ -30,7 +34,7 @@ export const addGeoButton = (map, options) => {
           },
           {
             iconLayout: 'default#image',
-            iconImageHref: options.geolocation.icon || iconPoint,
+            iconImageHref: options.geolocation.icon || navigationIcons.iconPoint,
             iconImageSize: options.geolocation.sizePoint || [47, 52],
             iconImageOffset: options.geolocation.offsetPoint || [-24, -52],
             balloonPanelMaxMapArea: 0

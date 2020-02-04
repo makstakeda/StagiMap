@@ -1,26 +1,18 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import { StagiMap } from './modules/stagimap';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+export default class StagiMapDemo extends React.PureComponent {
+  constructor() {
+    const map = new StagiMap({
+      locale: 'en'
+    });
+  };
+
+  render = () => (
+    <div className="stagimap-demo-app">
+      <h1>StagiMap Demo</h1>
+      <div id="stagimap"></div>
     </div>
-  );
-}
-
-export default App;
+  ) 
+};

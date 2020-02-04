@@ -1,7 +1,9 @@
 import { validateLocale } from './validate_locale';
 
-export const createInitialState = () => {
+export const createInitialState = ({ apiKey, selectedLocale}) => {
   // trying to inject original script with passed parameters
+
+  let locale;
 
   try {
     const localeRu = {
@@ -20,7 +22,7 @@ export const createInitialState = () => {
 
     const scripts = document.getElementsByTagName('script');
     let src = scripts[scripts.length-1].src.split('?')[1];
-    src = src == undefined ? [] : src.split('&');
+    src = src === undefined ? [] : src.split('&');
     
     const query = {};
     src.forEach(function(item, i, arr) {
@@ -28,21 +30,29 @@ export const createInitialState = () => {
       query[sStr[0]] = sStr[1];
     });
 
-    if (!query.lang || !validateLocale(query.lang)) {
-      localeStagiMap = localeEn;
-      throw new SyntaxError(localeStagiMap.langFail);
+    if (!selectedLocale || !validateLocale(selectedLocale)) {
+      locale = localeEn;
+      throw new SyntaxError(locale.langFail);
     };
 
     const script = document.createElement('script');
     script.setAttribute('type', 'text/javascript');
-    script.setAttribute('src', `https://api-maps.yandex.ru/2.1/?lang=${query.lang}`);
+    script.setAttribute('src', `https://api-maps.yandex.ru/2.1/?lang=${selectedLocale}&apikey=${apiKey}`);
+    console.log('injected');
     document.getElementsByTagName('head').item(0).appendChild(script);
-    if (query.lang.substr(0, 2) == 'ru') {
-      localeStagiMap = localeRu;
+
+    if (selectedLocale.substr(0, 2) === 'ru') {
+      locale = localeRu;
     } else {
-      localeStagiMap = localeEn;
+      locale = localeEn;
     };
   } catch (e) {
     throw e;
   };
+
+  return new Promise(resolve => {
+    setTimeout(() => resolve({
+      locale
+    }), 700);
+  });
 };
