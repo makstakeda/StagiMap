@@ -1,17 +1,25 @@
 @import url('https://fonts.googleapis.com/css?family=Noto+Sans+HK:400,500,700&display=swap');
 
 body {
-  background: #FFD393;
+  background: #EEF2E4;
   font-family: 'Noto Sans HK', sans-serif;
 }
 
 h1 {
   font-family: 'Noto Sans HK', sans-serif;
-  color: #FF974F;
+  color: #FF8C00;
+  text-shadow: 0 0 3px rgba(0, 0, 0, 0.15);
 }
 
 div.stagimap-demo-app {
   text-align: center;
+  width: 500px;
+  margin: 10px auto;
+}
+
+div.stagimap-demo-app-content {
+  text-align: center;
+  width: 718px;
 }
 
 div#stagimap {
@@ -20,7 +28,53 @@ div#stagimap {
   height: 500px;
   background: #EEF2E4;
   border-radius: 10px;
-  margin: 10px auto;
   overflow: hidden;
   box-shadow: 0px 0px 6px 0px rgba(0, 0, 0, 0.25);
+  display: inline-block;
+  position: relative;
+  z-index: 2;
+}
+
+div.stagimap-demo-app-nav {
+  display: inline-block;
+  vertical-align: top;
+  position: relative;
+  z-index: 1;
+  width: 218px;
+}
+
+div.stagimap-demo-app-nav button {
+  background: #5791E9;
+  color: #EEF2E4;
+  border: none;
+  display: block;
+  margin: 10px 0px;
+  padding: 7px 10px;
+  border-radius: 0px 5px 5px 0px;
+  font-size: 16px;
+  line-height: 16px;
+  font-weight: 700;
+  text-shadow: 0 0 3px #4f7EC7;
+  box-shadow: 0px 0px 6px 0px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+}
+
+div.stagimap-demo-app-nav button:hover {
+  background: #2f76E2;
+  box-shadow: 0px 0px 6px 0px rgba(0, 0, 0, 0.7);
+}
+
+div.stagimap-demo-app-locale a {
+  color: #000000;
+  text-decoration: none;
+  display: inline-block;
+  padding: 0px 5px;
+}
+
+div.stagimap-demo-app-locale a.selected {
+  font-weight: 700;
+}
+
+div.stagimap-demo-app-locale a:hover {
+  color: #FF8C00;
 }

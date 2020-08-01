@@ -7,7 +7,7 @@ export const addPoints = (map, options, section) => {
     return
   };
 
-  const listener = document.querySelectorAll('a[sm-point]').length !== 0;
+  const listener = document.querySelectorAll('[sm-point]').length !== 0;
 
   for (let i = 0; i < options.data.length; i++) {
     section.add(new ymaps.Placemark(
@@ -25,8 +25,8 @@ export const addPoints = (map, options, section) => {
       }
     ));
 
-    if (listener && document.querySelector('a[sm-point="'+i+'"]')) {
-      document.querySelector('a[sm-point="'+i+'"]').addEventListener('click', function(event) {
+    if (listener && document.querySelector('[sm-point="'+i+'"]')) {
+      document.querySelector('[sm-point="'+i+'"]').addEventListener('click', function(event) {
         event.stopPropagation();
         event.preventDefault();
         map.setZoom(12);

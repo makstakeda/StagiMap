@@ -1,3 +1,4 @@
+/*global ymaps*/
 import { validateLocale } from './validate_locale';
 
 export const createInitialState = ({ apiKey, selectedLocale}) => {
@@ -38,7 +39,6 @@ export const createInitialState = ({ apiKey, selectedLocale}) => {
     const script = document.createElement('script');
     script.setAttribute('type', 'text/javascript');
     script.setAttribute('src', `https://api-maps.yandex.ru/2.1/?lang=${selectedLocale}&apikey=${apiKey}`);
-    console.log('injected');
     document.getElementsByTagName('head').item(0).appendChild(script);
 
     if (selectedLocale.substr(0, 2) === 'ru') {
@@ -51,8 +51,11 @@ export const createInitialState = ({ apiKey, selectedLocale}) => {
   };
 
   return new Promise(resolve => {
-    setTimeout(() => resolve({
-      locale
-    }), 700);
+    const checkScriptLoading = setInterval(() => {
+      if (window.ymaps && window.ymaps.Map) {
+        clearInterval(checkScriptLoading);
+        resolve({ locale });
+      };
+    }, 300);
   });
 };
