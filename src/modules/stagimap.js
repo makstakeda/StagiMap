@@ -1,4 +1,3 @@
-/*global ymaps*/
 
 import { createMapBase } from './create_map_base';
 import { addZoomButtons } from './add_zoom_buttons';
@@ -27,7 +26,7 @@ export class StagiMap {
       
         let section;
         if (options.cluster === true) {
-          section = new ymaps.Clusterer({
+          section = new window.ymaps.Clusterer({
             clusterBalloonContentLayoutWidth: 400,
             clusterBalloonContentLayoutHeight: 300,
             clusterBalloonAccordionShowIcons: false,
@@ -48,13 +47,13 @@ export class StagiMap {
         };
       
         if (options.traffic === true) {
-          new ymaps.traffic.provider.Actual({}, { infoLayerShown: true }).setMap(myMap);
+          new window.ymaps.traffic.provider.Actual({}, { infoLayerShown: true }).setMap(myMap);
         };
       
         generateStyles();
       
         initSmMoveCenter(myMap);
-        ymaps.layout.storage.add();
+        window.ymaps.layout.storage.add();
       });
   }
 }

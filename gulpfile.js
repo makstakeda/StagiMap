@@ -7,49 +7,16 @@ const babelify = require('babelify');
 const fs = require('fs');
 const package = require('./package.json');
 
-gulp.task('build', () => {
-  if (!fs.existsSync('build')){
-    fs.mkdirSync('build');
-  };
-  fs.writeFile(
-    `build/package.json`,
-    `{
-  "name": "stagimap",
-  "version": "1.0.0",
-  "description": "Friendly configurator for Yandex.Maps",
-  "main": "index.js",
-  "scripts": {},
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/makstakeda/StagiMap.git"
-  },
-  "keywords": [
-    "Yandex.Maps",
-    "Maps",
-    "Google.Maps"
-  ],
-  "author": "Maxim Eremenko",
-  "bugs": {
-    "url": "https://github.com/makstakeda/StagiMap/issues"
-  },
-  "homepage": "https://github.com/makstakeda/StagiMap#readme"
-}`,
-    err => { if (err) { throw err; } }
-  );
-  fs.writeFile(
-    `build/index.js`,
-    `import { StagiMap } from './modules/stagimap'
-export default StagiMap;
-    `,
-    err => { if (err) { throw err; } }
-  );
-  
-  return gulp.src(['src/modules/**/*'])
-    .pipe(gulp.dest('build/modules'));
-});
+const outputDescription = `
+/*
+  © Yandex.Maps User Agreement https://yandex.ru/legal/maps_termsofuse/?lang=en
+*/
+
+/* global ymaps */
+`;
 
 gulp.task("bundle", function(){
-  return browserify({ entries: ["./src/modules/stagimap.js"] })
+  return browserify({ entries: ["./src/modules/index.js"] })
   .transform(babelify.configure({
     presets: ['@babel/preset-env', '@babel/preset-react'],
     plugins: ['@babel/plugin-proposal-class-properties']
@@ -57,6 +24,18 @@ gulp.task("bundle", function(){
   .bundle()
   .pipe(source(`${package.name}.min.js`))
   .pipe(buffer())
-  .pipe(uglify())
-  .pipe(gulp.dest("./dist"));
+  .pipe(uglify({ compress: false }))
+  .pipe(gulp.dest('./dist'))
+  .on('end', () => {
+    const output = fs.readFileSync('./dist/stagimap.min.js', 'utf-8');
+    fs.writeFile(
+      './dist/stagimap.min.js',
+      `${outputDescription}\n${output.split('use strict').join('')}`,
+      err => {
+        if (err) {
+          throw err;
+        }
+      }
+    );
+  });
 });
