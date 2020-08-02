@@ -1,5 +1,3 @@
-/*global ymaps*/
-
 export const createMapBase = (containerId, smOptions) => {
   const myMap = new window.ymaps.Map(containerId, {
     center: smOptions.center || [58.010374, 56.229398],

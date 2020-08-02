@@ -24,6 +24,7 @@ gulp.task("bundle", function(){
   .bundle()
   .pipe(source(`${package.name}.min.js`))
   .pipe(buffer())
+  // TO-DO: FIX MINIFICATION
   .pipe(uglify({ compress: false }))
   .pipe(gulp.dest('./dist'))
   .on('end', () => {

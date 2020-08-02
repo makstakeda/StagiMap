@@ -1,3 +1,4 @@
+/*global ymaps*/
 
 import { createMapBase } from './create_map_base';
 import { addZoomButtons } from './add_zoom_buttons';
@@ -47,13 +48,13 @@ export class StagiMap {
         };
       
         if (options.traffic === true) {
-          new window.ymaps.traffic.provider.Actual({}, { infoLayerShown: true }).setMap(myMap);
+          new ymaps.traffic.provider.Actual({}, { infoLayerShown: true }).setMap(myMap);
         };
       
         generateStyles();
       
         initSmMoveCenter(myMap);
-        window.ymaps.layout.storage.add();
+        ymaps.layout.storage.add();
       });
   }
 }

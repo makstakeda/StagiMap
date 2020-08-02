@@ -1,4 +1,3 @@
-/*global ymaps*/
 import { validateLocale } from './validate_locale';
 
 export const createInitialState = ({ apiKey, selectedLocale}) => {
