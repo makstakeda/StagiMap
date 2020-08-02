@@ -16,7 +16,7 @@
   "scripts": {
     "start": "react-scripts start",
     "bundle": "npx gulp bundle",
-    "test": "react-scripts test"
+    "test": "react-scripts test --watchAll=false"
   },
   "eslintConfig": {
     "extends": "react-app"

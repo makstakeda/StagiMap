@@ -4,11 +4,11 @@ import { navigationIcons } from './navigation_icons';
 
 export const addGeoButton = (map, options, locale) => {
   if (options.geolocation) {
-    const ButtonLayout = ymaps.templateLayoutFactory.createClass(`
-      <div title="{{data.title}}" class="ym-api-button" style="{{data.style}}">
-        <img class="my-button__img" src="{{ data.image }}" width="100%">
-      </div>
-    `);
+    const ButtonLayout = ymaps.templateLayoutFactory.createClass(
+      '<div title="{{data.title}}" class="ym-api-button" style="{{data.style}}">' +
+        '<img class="my-button__img" src="{{ data.image }}" width="100%">' +
+      '</div>'
+    );
 
     const geolocationControl = new ymaps.control.GeolocationControl({
       data: {
@@ -48,6 +48,6 @@ export const addGeoButton = (map, options, locale) => {
       map.panTo(position);
     });
 
-    map.controls.add(geolocationControl, {position: options.geolocation.geoPosition ||  {top: 10, left: 10}});
+    map.controls.add(geolocationControl, { position: options.geolocation.geoPosition ||  { top: 10, left: 10 } });
   };
 };
