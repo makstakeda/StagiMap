@@ -20,12 +20,12 @@ export default class StagiMapDemo extends React.PureComponent {
 
     const data = [
       {
-        coordinates: [34.4481,-119.2429],
+        coordinates: [34.4481, -119.2429],
         html: 'HTML точки 1',
         title: 'Заголовок точки 1',
         group: 0
       }, {
-        coordinates: [34.9481,-119.9429],
+        coordinates: [34.9481, -119.9429],
         html: 'HTML точки 2',
         title: 'Заголовок точки 2',
         group: 1

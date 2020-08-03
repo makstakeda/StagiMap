@@ -29,6 +29,12 @@ global.ymaps = {
     constructor(position, baloon, props) {
       mocksStorage['PlacemarkInstance.props'] = [position, baloon, props];
 
+      if (mocksStorage['PlacemarkInstance.count']) {
+        mocksStorage['PlacemarkInstance.count']++;
+      } else {
+        mocksStorage['PlacemarkInstance.count'] = 1;
+      };
+
       this.geometry = {
         setCoordinates: jest.fn(position => {
           mocksStorage['PlacemarkInstance.geometry.setCoordinates'] = position;
