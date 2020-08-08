@@ -9,6 +9,44 @@ global.ymaps = {
       Object.keys(mocksStorage).forEach(key => delete mocksStorage[key])
     }
   },
+  Map: class {
+    constructor(containerId, mapOptions, interactionOptions) {
+      if (mocksStorage['MapInstance.props']) {
+        mocksStorage['MapInstance.props'].push([containerId, mapOptions, interactionOptions]);
+      } else {
+        mocksStorage['MapInstance.props'] = [[containerId, mapOptions, interactionOptions]];
+      };
+
+      this.action = {
+        setCorrection: jest.fn(callback => {
+          if (mocksStorage['ButtonInstance.action.setCorrection']) {
+            mocksStorage['ButtonInstance.action.setCorrection'].push(callback);
+          } else {
+            mocksStorage['ButtonInstance.action.setCorrection'] = [callback];
+          };
+        })
+      };
+
+      this.options = {
+        get: key => {
+          if (key === 'projection') {
+            return {
+              fromGlobalPixels: (globalPixelCenter, zoom) => {
+                return [globalPixelCenter[0] / zoom, globalPixelCenter[1] / zoom];
+              },
+              toGlobalPixels: (coordinates, zoom) => {
+                return [coordinates[0] * zoom, coordinates[1] * zoom];
+              }
+            }
+          }
+        }
+      };
+
+      this.container = {
+        getSize: () => [1000, 1000]
+      }
+    }
+  },
   control: {
     GeolocationControl: class {
       constructor(props) {

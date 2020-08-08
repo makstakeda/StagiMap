@@ -1,42 +1,56 @@
+/*global ymaps*/
+
 export const createMapBase = (containerId, smOptions) => {
-  const myMap = new window.ymaps.Map(containerId, {
-    center: smOptions.center || [58.010374, 56.229398],
-    zoom: smOptions.initialZoom || 6,
-    controls: []
-  }, {
-    searchControlProvider: 'yandex#search',
-    restrictMapArea: smOptions.restrictArea,
-    suppressMapOpenBlock: true,
-    maxZoom: smOptions.maxZoom || 16,
-    minZoom: smOptions.minZoom || 1,
-  });
+  const DEFAULT_ZOOM = 6;
+  const MAX_ZOOM = 16;
+  const MIN_ZOOM = 1;
+  const TICK_LIMIT = 85;
+
+  const myMap = new ymaps.Map(
+    containerId,
+    {
+      center: smOptions.center || [0, 0],
+      zoom: smOptions.initialZoom || DEFAULT_ZOOM,
+      controls: []
+    },
+    {
+      searchControlProvider: 'yandex#search',
+      restrictMapArea: smOptions.restrictArea,
+      suppressMapOpenBlock: true,
+      maxZoom: smOptions.maxZoom || MAX_ZOOM,
+      minZoom: smOptions.minZoom || MIN_ZOOM,
+    }
+  );
 
   myMap.action.setCorrection(tick => {
-    let projection = myMap.options.get('projection');
-    let mapSize = myMap.container.getSize();
-    let tickCenter = projection.fromGlobalPixels(tick.globalPixelCenter, tick.zoom);
-    let top = [tick.globalPixelCenter[0], tick.globalPixelCenter[1] - mapSize[1] / 2];
-    let bot = [tick.globalPixelCenter[0], tick.globalPixelCenter[1] + mapSize[1] / 2];
-    let tickTop = projection.fromGlobalPixels(top, tick.zoom);
-    let tickBot = projection.fromGlobalPixels(bot, tick.zoom);
-    if (tickTop[0] > 85) {
+    const projection = myMap.options.get('projection');
+    const mapSize = myMap.container.getSize();
+    const tickCenter = projection.fromGlobalPixels(tick.globalPixelCenter, tick.zoom);
+    const top = [tick.globalPixelCenter[0], tick.globalPixelCenter[1] - mapSize[1] / 2];
+    const bottom = [tick.globalPixelCenter[0], tick.globalPixelCenter[1] + mapSize[1] / 2];
+    const tickTop = projection.fromGlobalPixels(top, tick.zoom);
+    const tickBottom = projection.fromGlobalPixels(bottom, tick.zoom);
+
+    if (tickTop[0] > TICK_LIMIT) {
       tick.globalPixelCenter = projection.toGlobalPixels(
-        [85, tickCenter[1]],
+        [TICK_LIMIT, tickCenter[1]],
         tick.zoom
       );
       tick.globalPixelCenter = [tick.globalPixelCenter[0], tick.globalPixelCenter[1] + mapSize[1] / 2];
       tick.duration = 0;
     };
-    if (tickBot[0] < -85) {
+
+    if (tickBottom[0] < -TICK_LIMIT) {
       tick.globalPixelCenter = projection.toGlobalPixels(
-        [-85, tickCenter[1]],
+        [-TICK_LIMIT, tickCenter[1]],
         tick.zoom
       );
       tick.globalPixelCenter = [tick.globalPixelCenter[0], tick.globalPixelCenter[1] - mapSize[1] / 2];
       tick.duration = 0;
     };
+
     return tick;
   });
 
   return myMap;
-}
+};
