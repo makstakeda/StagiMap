@@ -4,7 +4,7 @@ import { navigationIcons } from './navigation_icons';
 import { getButtonLayout } from './get_button_layout';
 
 export const addZoomButtons = (map, options, locale) => {
-  const position = options.zoom || {top: 80, left: 25};
+  const position = { top: 80, left: 25 };
 
   const zoomInControl = new ymaps.control.Button({
     data: {
@@ -19,13 +19,15 @@ export const addZoomButtons = (map, options, locale) => {
   });
 
   zoomInControl.events.add('click', function () {
-    if (map.getZoom() === 17) {
+    const currentZoom = map.getZoom();
+    if (currentZoom === 17) {
       return;
     };
-    map.setZoom(map.getZoom() + 1);
+
+    map.setZoom(currentZoom + 1);
   });
 
-  map.controls.add(zoomInControl, {position: options.zoomButtons.inPosition ||  {top: position.top, left: position.left}});
+  map.controls.add(zoomInControl, { position: options.zoomButtons.inPosition ||  { top: position.top, left: position.left } });
 
   const zoomOutControl = new ymaps.control.Button({
     data: {
@@ -40,11 +42,13 @@ export const addZoomButtons = (map, options, locale) => {
   });
 
   zoomOutControl.events.add('click', function () {
-    if (map.getZoom() === 0) {
-      return
+    const currentZoom = map.getZoom();
+    if (currentZoom === 0) {
+      return;
     };
-    map.setZoom(map.getZoom() - 1);
+
+    map.setZoom(currentZoom - 1);
   });
 
-  map.controls.add(zoomOutControl, {position: options.zoomButtons.outPosition || {top: position.top + 30, left: position.left}});
+  map.controls.add(zoomOutControl, { position: options.zoomButtons.outPosition || { top: position.top + 30, left: position.left } });
 };

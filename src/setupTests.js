@@ -20,6 +20,31 @@ global.ymaps = {
           })
         };
       };
+    },
+    Button: class {
+      constructor(props) {
+        if (mocksStorage['ButtonInstance.props']) {
+          mocksStorage['ButtonInstance.props'].push(props);
+        } else {
+          mocksStorage['ButtonInstance.props'] = [props];
+        };
+
+        if (mocksStorage['ButtonInstance.count']) {
+          mocksStorage['ButtonInstance.count']++;
+        } else {
+          mocksStorage['ButtonInstance.count'] = 1;
+        };
+
+        this.events = {
+          add: jest.fn((method, callback) => {
+            if (mocksStorage[`ButtonInstance.events.add.${method}`]) {
+              mocksStorage[`ButtonInstance.events.add.${method}`].push(callback);
+            } else {
+              mocksStorage[`ButtonInstance.events.add.${method}`] = [callback];
+            };
+          })
+        };
+      };
     }
   },
   templateLayoutFactory: {
