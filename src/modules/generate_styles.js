@@ -1,6 +1,10 @@
+export const stylesTagId = 'stagimap-styles';
+
 export const generateStyles = () => {
   const ver = document.getElementById('stagimap').children[0].getAttribute('class').slice(0, -4);
   const styles = document.createElement('style');
+  styles.id = stylesTagId;
+
   styles.innerHTML = `
     .ym-api-button {
       width: 60px;
