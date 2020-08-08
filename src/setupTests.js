@@ -18,8 +18,8 @@ global.ymaps = {
           add: jest.fn((method, callback) => {
             mocksStorage[`GeolocationControlInstance.events.add.${method}`] = callback;
           })
-        }
-      }
+        };
+      };
     }
   },
   templateLayoutFactory: {
@@ -39,7 +39,29 @@ global.ymaps = {
         setCoordinates: jest.fn(position => {
           mocksStorage['PlacemarkInstance.geometry.setCoordinates'] = position;
         })
-      }
+      };
+    }
+  },
+  multiRouter: {
+    MultiRoute: class {
+      constructor(config, props) {
+        mocksStorage['multiRouter.MultiRouteInstance.props'] = [config, props];
+  
+        this.model = {
+          getReferencePoints: jest.fn(() => {
+            if (mocksStorage['multiRouter.MultiRouteInstance.getReferencePoints.calls']) {
+              mocksStorage['multiRouter.MultiRouteInstance.getReferencePoints.calls']++;
+            } else {
+              mocksStorage['multiRouter.MultiRouteInstance.getReferencePoints.calls'] = 1;
+            };
+
+            return [];
+          }),
+          setReferencePoints: jest.fn((referencePoints, index) => {
+            mocksStorage['multiRouter.MultiRouteInstance.setReferencePoints.props'] = [referencePoints, index];
+          })
+        };
+      };
     }
   }
 };
