@@ -130,7 +130,7 @@ Parameter                       | Format               | Description
 `smOptions.data[i].icon`        | `url`                | sets the point's icon template
 `smOptions.data[i].sizePoint`   | `[integer, integer]` | sets the point's size as `[WIDTH, HEIGHT]`
 `smOptions.data[i].offsetPoint` | `[integer, integer]` | sets the point's offset as `[L-OFFSET, T-OFFSET]`
-`smOptions.data[i].group`       | `integer`            | sets the group for the point if it is needed
+`smOptions.data[i].group`       | `string`             | sets the group for the point if it is needed
 
 #### Routes
 
@@ -159,5 +159,5 @@ Attribute  | Format             | Description
 ---------- | ------------------ | -------------
 `sm-point` | `index`            | moves to the point on the map selected by index in `smOptions.data`
 `sm-move`  | `integer, integer` | moves to the passed coordinates (latitude and longitude), for example, `sm-move="0, 0"`
-`sm-show`  | `integer`          | toggles the group's visibility bu passing the group's identifier related to the points with specified group `smOptions.data[i].group`. If no value is passed, it shows all points on click.
+`sm-show`  | `string`           | toggles the group's visibility bu passing the group's identifier related to the points with specified group `smOptions.data[i].group`. If no value is passed, it shows all points on click.
 

@@ -47,6 +47,23 @@ global.ymaps = {
       }
     }
   },
+  Clusterer: class {
+    constructor(clusterOptions) {
+      if (mocksStorage['ClustererInstance.props']) {
+        mocksStorage['ClustererInstance.props'].push([clusterOptions]);
+      } else {
+        mocksStorage['ClustererInstance.props'] = [[clusterOptions]];
+      };
+
+      this.add = jest.fn((position, baloon, props) => {
+        if (mocksStorage['ClustererInstance.add']) {
+          mocksStorage['ClustererInstance.add'].push([position, baloon, props]);
+        } else {
+          mocksStorage['ClustererInstance.add'] = [position, baloon, props];
+        };
+      })
+    }
+  },
   control: {
     GeolocationControl: class {
       constructor(props) {

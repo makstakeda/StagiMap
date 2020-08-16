@@ -3,7 +3,7 @@
 import { navigationIcons } from './navigation_icons';
 
 export const initSmShowPoints = (map, options) => {
-  const showPoints = document.querySelectorAll('a[sm-show]');
+  const showPoints = document.querySelectorAll('[sm-show]');
   for (var i = 0; i < showPoints.length; i++) {
 
     showPoints[i].addEventListener('click', event => {
@@ -34,14 +34,13 @@ export const initSmShowPoints = (map, options) => {
         let referencePoints;
         let multiRoute;
         if (options.router) {
-          multiRoute = new ymaps.multiRouter.MultiRoute({
-            referencePoints:[options.router.startPoint,options.router.endPoint],
-            params:{
-              results: options.router.maxWays || 2
-            }
-          },{
-            boundsAutoApply:true
-          });
+          multiRoute = new ymaps.multiRouter.MultiRoute(
+            {
+              referencePoints:[options.router.startPoint, options.router.endPoint],
+              params:{ results: options.router.maxWays || 2 }
+            },
+            { boundsAutoApply:true }
+          );
           map.geoObjects.add(multiRoute);
           referencePoints = multiRoute.model.getReferencePoints();
           if (options.router.refPoints) {
@@ -84,7 +83,8 @@ export const initSmShowPoints = (map, options) => {
                 balloonContent: options.data[i].html,
                 clusterCaption: options.data[i].title,
                 hintContent: options.data[i].title
-              }, {
+              },
+              {
                 iconLayout: 'default#image',
                 iconImageHref: options.data[i].icon || navigationIcons.iconPlacemark,
                 iconImageSize: options.data[i].sizePoint || [42, 46],
