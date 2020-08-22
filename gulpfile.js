@@ -12,7 +12,8 @@ const outputDescription = `
   © Yandex.Maps Service User Agreement https://yandex.ru/legal/maps_termsofuse/?lang=en
 */
 
-/* global ymaps */
+/* global ymaps   */
+/* eslint-disable */
 `;
 
 gulp.task("bundle", function(){
