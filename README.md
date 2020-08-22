@@ -1,10 +1,10 @@
-# Stagimap
+# StagiMap
 
-Stagimap is a simple and friendly configurator for Yandex.Maps. Goal of this library is to give to any developer simple ways of customizing and deploying maps on buisness websites without learning required API-methods. Just with few lines of code you can build your own functional map with clusters, navigation, hide/show functions and more.
+StagiMap is a simple and friendly configurator for Yandex.Maps. Goal of this library is to give to any developer simple ways of customizing and deploying maps on buisness websites without learning required API-methods. Just with few lines of code you can build your own functional map with clusters, navigation, hide/show functions and more.
 
-**NOTE:** Stagimap is based on version 2.1.XX of Yandex.Maps API and depends on its lifecycle. The library is not created for flexible tune-in and supports limited features of [Yandex.Maps API](https://tech.yandex.com/maps/jsapi/).
+**NOTE:** StagiMap is based on version 2.1.XX of Yandex.Maps API and depends on its lifecycle. The library is not created for flexible tune-in and supports limited features of [Yandex.Maps API](https://tech.yandex.com/maps/jsapi/).
 
-Documentation and demo in Russian: [makstakeda.ru/stagimap](http://makstakeda.ru/stagimap) 
+Documentation on Russian is available [here](README_RU.md).
 
 **Main features:**
 
@@ -31,7 +31,7 @@ You can use it as a demo or for further development on top of this project.
 
 ### Build from the source and importing into your project
 
-To generate production version of Stagimap library, run the following command
+To generate production version of StagiMap library, run the following command
 
 ```
 npm run bundle
@@ -51,25 +51,23 @@ const map = new StagiMap({
 });
 ```
 
-You should allocate `div#stagimap` on HTML-template which will be used as container for the map.
-
-Instance of `StagiMap` class to initialize the map should be created with parameters to define behaviour and state of rendered map. Coordinates on the parameters are presented in the `coordinateds = [LATITUDE, LONGITUDE]` format.
+Coordinates on the parameters are presented in the `coordinateds = [LATITUDE, LONGITUDE]` format.
 
 #### Authorization
 
-Some features are limited and requires usage of API key. You need to have Yandex account for being able to [create API key](https://developer.tech.yandex.ru/services/). The needed key is `JavaScript API and Geocoder HTTP API`.
+You need to have Yandex account for being able to [create API key](https://developer.tech.yandex.ru/services/).
 
-Parameter          | Format     | Description
------------------- | ---------- | ------------- 
-`smOptions.locale` | `RFC-3066` | sets preferred localization
+Parameter          | Format   | Description
+------------------ | -------- | ------------- 
+`smOptions.apiKey` | `string` | sets API key which will be used for access to Yandex.Maps API
 
 #### Localization
 
 You must choose the map's localization in RFC-3066 format (Get Information about supported localizations on [tech.yandex.com/maps/doc/intro/concepts/localization-docpage](https://tech.yandex.com/maps/doc/intro/concepts/localization-docpage/). If there is no selected localization, `en` will be used as default.
 
-Parameter          | Format   | Description
------------------- | -------- | ------------- 
-`smOptions.apiKey` | `string` | sets API key which will be used for access to Yandex.Maps API
+Parameter          | Format     | Description
+------------------ | ---------- | ------------- 
+`smOptions.locale` | `RFC-3066` | sets preferred localization
 
 #### Main parameters
 
@@ -125,7 +123,7 @@ Points can be added on the map within `smOptions.data` property based on describ
 
 Parameter                       | Format               | Description
 ------------------------------- | -------------------- | ------------- 
-`smOptions.data[i].coordinates` | `coordinateds`       | sets the coordinates of the point's center as `[LATITUDE, LONGITUDE]`
+`smOptions.data[i].coordinates` | `coordinateds`       | sets the coordinates of the point's center
 `smOptions.data[i].html`        | `string`             | sets text or HTML-string for the point's baloon content
 `smOptions.data[i].title`       | `string`             | sets text or HTML for the point's baloon title
 `smOptions.data[i].icon`        | `url`                | sets the point's icon template
@@ -137,14 +135,12 @@ Parameter                       | Format               | Description
 
 Router is providing ability to build multiroutes from A to B.
 
-**NOTE:** In current revision of API it requires API-key to be passed.
-
 Parameter                     | Format           | Description
 ----------------------------- | ---------------- | ------------- 
-`smOptions.router.startPoint` | `coordinateds`   | sets the coordinates of the route start point as `[LATITUDE, LONGITUDE]`
-`smOptions.router.endPoint`   | `coordinateds`   | sets the coordinates of the route end point as `[LATITUDE, LONGITUDE]`
-`smOptions.router.maxWays`    | `integer`        | sets the maximum possible ways from between the start and end point.
-`smOptions.router.refPoints`  | `[coordinateds]` | sets the transit points between the the start and end point as `[[LATITUDE, LONGITUDE]]`
+`smOptions.router.startPoint` | `coordinateds`   | sets the coordinates of the route start point
+`smOptions.router.endPoint`   | `coordinateds`   | sets the coordinates of the route end point
+`smOptions.router.maxWays`    | `integer`        | sets the maximum possible ways from between the start and end point
+`smOptions.router.refPoints`  | `[coordinateds]` | sets the transit points between the the start and end point
 
 #### Traffic
 
@@ -156,9 +152,10 @@ Parameter           | Format    | Description
 
 ### Integration on HTML template
 
+The following HTML attributes can be set on elements to control the map from outside.
+
 Attribute  | Format             | Description
 ---------- | ------------------ | -------------
 `sm-point` | `index`            | moves to the point on the map selected by index in `smOptions.data`
 `sm-move`  | `integer, integer` | moves to the passed coordinates (latitude and longitude), for example, `sm-move="0, 0"`
 `sm-show`  | `string`           | toggles the group's visibility bu passing the group's identifier related to the points with specified group `smOptions.data[i].group`. If no value is passed, it shows all points on click.
-
