@@ -33,7 +33,7 @@ describe('createMapBase', () => {
       });
 
       expect(ymaps.mocksStorage.get('ButtonInstance.action.setCorrection').length).toBe(1);
-      const setCorrectionCallback = ymaps.mocksStorage.get('ButtonInstance.action.setCorrection')[0];
+      const setCorrectionCallback = ymaps.mocksStorage.get('ButtonInstance.action.setCorrection')[0][0];
 
       let tick;
       tick = setCorrectionCallback({ globalPixelCenter: [2000, -7000], zoom: 10 });

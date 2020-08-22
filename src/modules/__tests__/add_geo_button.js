@@ -30,7 +30,7 @@ describe('addGeoButton', () => {
         '</div>'
       );
 
-      const locationProps = ymaps.mocksStorage.get('GeolocationControlInstance.props');
+      const locationProps = ymaps.mocksStorage.get('GeolocationControlInstance.props')[0][0];
       expect(locationProps).toEqual({
         data: {
           image: geolocationOptions ? geolocationOptions.geoButton : navigationIcons.urlButton,
@@ -40,7 +40,7 @@ describe('addGeoButton', () => {
         options: { layout: 'created', noPlacemark: true }
       });
 
-      const locationEvent = ymaps.mocksStorage.get('GeolocationControlInstance.events.add.locationchange');
+      const locationEvent = ymaps.mocksStorage.get('GeolocationControlInstance.events.add.locationchange')[0][0];
       expect(locationEvent).toBeDefined();
 
       expect(map.controls.add).toHaveBeenCalledTimes(1);
@@ -58,7 +58,7 @@ describe('addGeoButton', () => {
 
       locationEvent({ get: key => key === 'position' ? position : null });
 
-      placemarkProps = ymaps.mocksStorage.get('PlacemarkInstance.props');
+      placemarkProps = ymaps.mocksStorage.get('PlacemarkInstance.props')[0];
       expect(placemarkProps[0]).toEqual(position);
       expect(placemarkProps[1]).toEqual({ balloonContent: '' });
       expect(placemarkProps[2]).toEqual({

@@ -50,14 +50,13 @@ describe('addPoints', () => {
       expect(section.add.mock.calls[0][0] instanceof ymaps.Placemark).toBeTruthy();
       expect(section.add.mock.calls[1][0] instanceof ymaps.Placemark).toBeTruthy();
       expect(ymaps.mocksStorage.get('PlacemarkInstance.count')).toBe(2);
-      const placemarkProps = ymaps.mocksStorage.get('PlacemarkInstance.props');
+      const placemarkProps = ymaps.mocksStorage.get('PlacemarkInstance.props')[1];
       expect(placemarkProps[0]).toEqual(data[1].coordinates);
       expect(placemarkProps[1]).toEqual({
         balloonContent: data[1].html,
         clusterCaption: data[1].title,
         hintContent: data[1].title
       });
-
       expect(placemarkProps[2]).toEqual({
         iconLayout: 'default#image',
         iconImageHref: customIcon ? customIcon.icon : navigationIcons.iconPlacemark,

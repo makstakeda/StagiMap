@@ -172,7 +172,7 @@ describe('StagiMap', () => {
       const trafficProps = ymaps.mocksStorage.get('traffic.provider.ActualInstance.props');
       expect(trafficProps[0][0]).toEqual({});
       expect(trafficProps[0][1]).toEqual({ infoLayerShown: true });
-      expect(ymaps.mocksStorage.get('traffic.provider.ActualInstance.setMap')[0]).toEqual(mockMapInstance);
+      expect(ymaps.mocksStorage.get('traffic.provider.ActualInstance.setMap')[0][0]).toEqual(mockMapInstance);
       expect(generateStyles).toHaveBeenCalledTimes(1);
       expect(initSmMoveCenter).toHaveBeenCalledTimes(1);
       expect(initSmMoveCenter.mock.calls[0][0]).toEqual(mockMapInstance);

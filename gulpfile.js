@@ -9,7 +9,7 @@ const package = require('./package.json');
 
 const outputDescription = `
 /*
-  © Yandex.Maps User Agreement https://yandex.ru/legal/maps_termsofuse/?lang=en
+  © Yandex.Maps Service User Agreement https://yandex.ru/legal/maps_termsofuse/?lang=en
 */
 
 /* global ymaps */

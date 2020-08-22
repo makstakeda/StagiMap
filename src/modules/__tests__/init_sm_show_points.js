@@ -53,7 +53,7 @@ describe('initSmShowPoints', () => {
       expect(map.geoObjects.removeAll).toHaveBeenCalledTimes(1);
       expect(map.geoObjects.add).toHaveBeenCalledTimes(2);
       expect(map.geoObjects.add.mock.calls[0][0] instanceof ymaps.multiRouter.MultiRoute).toBeTruthy();
-      const routeProps = ymaps.mocksStorage.get('multiRouter.MultiRouteInstance.props');
+      const routeProps = ymaps.mocksStorage.get('multiRouter.MultiRouteInstance.props')[0];
       expect(routeProps[0]).toEqual({
         referencePoints:[options.router.startPoint, options.router.endPoint],
         params:{ results: options.router.maxWays }
@@ -62,7 +62,7 @@ describe('initSmShowPoints', () => {
 
       expect(ymaps.mocksStorage.get('multiRouter.MultiRouteInstance.getReferencePoints.calls')).toBe(1);
 
-      const setReferencePointsProps = ymaps.mocksStorage.get('multiRouter.MultiRouteInstance.setReferencePoints.props');
+      const setReferencePointsProps = ymaps.mocksStorage.get('multiRouter.MultiRouteInstance.setReferencePoints.props')[0];
 
       expect(setReferencePointsProps[0]).toEqual(options.router.refPoints.reverse());
       expect(setReferencePointsProps[1]).toEqual([1]);
@@ -91,18 +91,17 @@ describe('initSmShowPoints', () => {
         }]
       });
 
-      const placemarkInstance = ymaps.mocksStorage.get('ClustererInstance.add')[0];
+      const placemarkInstance = ymaps.mocksStorage.get('ClustererInstance.add')[0][0];
       expect(placemarkInstance instanceof ymaps.Placemark).toBeTruthy();
     };
 
-    const placemarkProps = ymaps.mocksStorage.get('PlacemarkInstance.props');
+    const placemarkProps = ymaps.mocksStorage.get('PlacemarkInstance.props')[0];
     expect(placemarkProps[0]).toEqual(options.data[1].coordinates);
     expect(placemarkProps[1]).toEqual({
       balloonContent: options.data[1].html,
       clusterCaption: options.data[1].title,
       hintContent: options.data[1].title
     });
-
     expect(placemarkProps[2]).toEqual({
       iconLayout: 'default#image',
       iconImageHref: missedProps ? navigationIcons.iconPlacemark : options.data[1].icon,

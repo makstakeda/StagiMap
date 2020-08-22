@@ -27,7 +27,7 @@ describe('addZoomButtons', () => {
     const testFlow = zoomButtonOptions => {
       expect(ymaps.mocksStorage.get('ButtonInstance.count')).toBe(2);
       const buttonProps = ymaps.mocksStorage.get('ButtonInstance.props');
-      expect(buttonProps[0]).toEqual({
+      expect(buttonProps[0][0]).toEqual({
         data: {
           image: zoomButtonOptions ? zoomButtonOptions.inButton : navigationIcons.zoomIn,
           title: zoomButtonOptions ? zoomButtonOptions.inText : locale.zoomIn,
@@ -38,7 +38,7 @@ describe('addZoomButtons', () => {
           noPlacemark: true
         }
       });
-      expect(buttonProps[1]).toEqual({
+      expect(buttonProps[1][0]).toEqual({
         data: {
           image: zoomButtonOptions ? zoomButtonOptions.outButton : navigationIcons.zoomOut,
           title: zoomButtonOptions ? zoomButtonOptions.outText : locale.zoomOut,
@@ -64,12 +64,12 @@ describe('addZoomButtons', () => {
       expect(map.getZoom).toHaveBeenCalledTimes(0);
       expect(map.setZoom).toHaveBeenCalledTimes(0);
 
-      ymaps.mocksStorage.get('ButtonInstance.events.add.click')[0]();
+      ymaps.mocksStorage.get('ButtonInstance.events.add.click')[0][0]();
       expect(map.getZoom).toHaveBeenCalledTimes(1);
       expect(map.setZoom).toHaveBeenCalledTimes(1);
       expect(map.setZoom.mock.calls[0][0]).toBe(MAP_ZOOM + 1);
 
-      ymaps.mocksStorage.get('ButtonInstance.events.add.click')[1]();
+      ymaps.mocksStorage.get('ButtonInstance.events.add.click')[1][0]();
       expect(map.getZoom).toHaveBeenCalledTimes(2);
       expect(map.setZoom).toHaveBeenCalledTimes(2);
       expect(map.setZoom.mock.calls[1][0]).toBe(MAP_ZOOM - 1);

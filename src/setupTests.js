@@ -1,6 +1,20 @@
 import '@testing-library/jest-dom/extend-expect';
 
 const mocksStorage = {};
+const setPropsOnMockStorage = (key, value) => {
+  if (!mocksStorage[key]) {
+    mocksStorage[key] = [value];
+  } else {
+    mocksStorage[key].push(value);
+  };
+};
+const setCountOnMockStorage = key => {
+  if (mocksStorage[key]) {
+    mocksStorage[key]++;
+  } else {
+    mocksStorage[key] = 1;
+  };
+}
 
 global.ymaps = {
   mocksStorage: {
@@ -9,21 +23,18 @@ global.ymaps = {
       Object.keys(mocksStorage).forEach(key => delete mocksStorage[key])
     }
   },
+  layout: {
+    storage: {
+      add: jest.fn()
+    }
+  },
   Map: class {
     constructor(containerId, mapOptions, interactionOptions) {
-      if (mocksStorage['MapInstance.props']) {
-        mocksStorage['MapInstance.props'].push([containerId, mapOptions, interactionOptions]);
-      } else {
-        mocksStorage['MapInstance.props'] = [[containerId, mapOptions, interactionOptions]];
-      };
+      setPropsOnMockStorage('MapInstance.props', [containerId, mapOptions, interactionOptions]);
 
       this.action = {
         setCorrection: jest.fn(callback => {
-          if (mocksStorage['ButtonInstance.action.setCorrection']) {
-            mocksStorage['ButtonInstance.action.setCorrection'].push(callback);
-          } else {
-            mocksStorage['ButtonInstance.action.setCorrection'] = [callback];
-          };
+          setPropsOnMockStorage('ButtonInstance.action.setCorrection', [callback]);
         })
       };
 
@@ -49,54 +60,33 @@ global.ymaps = {
   },
   Clusterer: class {
     constructor(clusterOptions) {
-      if (mocksStorage['ClustererInstance.props']) {
-        mocksStorage['ClustererInstance.props'].push([clusterOptions]);
-      } else {
-        mocksStorage['ClustererInstance.props'] = [[clusterOptions]];
-      };
+      setPropsOnMockStorage('ClustererInstance.props', [clusterOptions]);
 
       this.add = jest.fn((position, baloon, props) => {
-        if (mocksStorage['ClustererInstance.add']) {
-          mocksStorage['ClustererInstance.add'].push([position, baloon, props]);
-        } else {
-          mocksStorage['ClustererInstance.add'] = [position, baloon, props];
-        };
+        setPropsOnMockStorage('ClustererInstance.add', [position, baloon, props]);
       })
     }
   },
   control: {
     GeolocationControl: class {
       constructor(props) {
-        mocksStorage['GeolocationControlInstance.props'] = props;
+        setPropsOnMockStorage('GeolocationControlInstance.props', [props]);
 
         this.events = {
           add: jest.fn((method, callback) => {
-            mocksStorage[`GeolocationControlInstance.events.add.${method}`] = callback;
+            setPropsOnMockStorage(`GeolocationControlInstance.events.add.${method}`, [callback]);
           })
         };
       };
     },
     Button: class {
       constructor(props) {
-        if (mocksStorage['ButtonInstance.props']) {
-          mocksStorage['ButtonInstance.props'].push(props);
-        } else {
-          mocksStorage['ButtonInstance.props'] = [props];
-        };
-
-        if (mocksStorage['ButtonInstance.count']) {
-          mocksStorage['ButtonInstance.count']++;
-        } else {
-          mocksStorage['ButtonInstance.count'] = 1;
-        };
+        setPropsOnMockStorage('ButtonInstance.props', [props]);
+        setCountOnMockStorage('ButtonInstance.count');
 
         this.events = {
           add: jest.fn((method, callback) => {
-            if (mocksStorage[`ButtonInstance.events.add.${method}`]) {
-              mocksStorage[`ButtonInstance.events.add.${method}`].push(callback);
-            } else {
-              mocksStorage[`ButtonInstance.events.add.${method}`] = [callback];
-            };
+            setPropsOnMockStorage(`ButtonInstance.events.add.${method}`, [callback]);
           })
         };
       };
@@ -107,17 +97,12 @@ global.ymaps = {
   },
   Placemark: class {
     constructor(position, baloon, props) {
-      mocksStorage['PlacemarkInstance.props'] = [position, baloon, props];
-
-      if (mocksStorage['PlacemarkInstance.count']) {
-        mocksStorage['PlacemarkInstance.count']++;
-      } else {
-        mocksStorage['PlacemarkInstance.count'] = 1;
-      };
+      setPropsOnMockStorage('PlacemarkInstance.props', [position, baloon, props]);
+      setCountOnMockStorage('PlacemarkInstance.count');
 
       this.geometry = {
         setCoordinates: jest.fn(position => {
-          mocksStorage['PlacemarkInstance.geometry.setCoordinates'] = position;
+          setPropsOnMockStorage('PlacemarkInstance.geometry.setCoordinates', [position]);
         })
       };
     }
@@ -125,23 +110,33 @@ global.ymaps = {
   multiRouter: {
     MultiRoute: class {
       constructor(config, props) {
-        mocksStorage['multiRouter.MultiRouteInstance.props'] = [config, props];
+        setPropsOnMockStorage('multiRouter.MultiRouteInstance.props', [config, props]);
   
         this.model = {
           getReferencePoints: jest.fn(() => {
-            if (mocksStorage['multiRouter.MultiRouteInstance.getReferencePoints.calls']) {
-              mocksStorage['multiRouter.MultiRouteInstance.getReferencePoints.calls']++;
-            } else {
-              mocksStorage['multiRouter.MultiRouteInstance.getReferencePoints.calls'] = 1;
-            };
+            setCountOnMockStorage('multiRouter.MultiRouteInstance.getReferencePoints.calls');
 
             return [];
           }),
           setReferencePoints: jest.fn((referencePoints, index) => {
-            mocksStorage['multiRouter.MultiRouteInstance.setReferencePoints.props'] = [referencePoints, index];
+            setPropsOnMockStorage('multiRouter.MultiRouteInstance.setReferencePoints.props', [referencePoints, index]);
           })
         };
       };
+    }
+  },
+  traffic: {
+    provider: {
+      Actual: class {
+        constructor(config, trafficOptions) {
+          setPropsOnMockStorage('traffic.provider.ActualInstance.props', [config, trafficOptions]);
+          setCountOnMockStorage('traffic.provider.ActualInstance.count');
+    
+          this.setMap = jest.fn((map) => {
+            setPropsOnMockStorage('traffic.provider.ActualInstance.setMap', [map]);
+          })
+        }
+      }
     }
   }
 };

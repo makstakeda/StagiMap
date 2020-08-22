@@ -14,7 +14,7 @@ describe('addRoute', () => {
 
   describe('adds the route passed with options', () => {
     const testFlow = (routerOptions) => {
-      const multiRouterProps = ymaps.mocksStorage.get('multiRouter.MultiRouteInstance.props');
+      const multiRouterProps = ymaps.mocksStorage.get('multiRouter.MultiRouteInstance.props')[0];
       expect(multiRouterProps[0]).toEqual({
         referencePoints: [routerOptions.startPoint, routerOptions.endPoint],
         params:{ results: routerOptions.maxWays || 2 }
@@ -26,7 +26,7 @@ describe('addRoute', () => {
       if (routerOptions.refPoints) {
         expect(ymaps.mocksStorage.get('multiRouter.MultiRouteInstance.getReferencePoints.calls')).toBe(1);
 
-        const setReferencePointsProps = ymaps.mocksStorage.get('multiRouter.MultiRouteInstance.setReferencePoints.props');
+        const setReferencePointsProps = ymaps.mocksStorage.get('multiRouter.MultiRouteInstance.setReferencePoints.props')[0];
 
         expect(setReferencePointsProps[0]).toEqual(routerOptions.refPoints.reverse());
         expect(setReferencePointsProps[1]).toEqual([1]);
