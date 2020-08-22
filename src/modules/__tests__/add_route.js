@@ -20,7 +20,7 @@ describe('addRoute', () => {
         params:{ results: routerOptions.maxWays || 2 }
       });
       expect(multiRouterProps[1]).toEqual({ boundsAutoApply:true });
-  
+
       expect(map.geoObjects.add).toHaveBeenCalledTimes(1);
 
       if (routerOptions.refPoints) {

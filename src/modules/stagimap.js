@@ -21,12 +21,12 @@ export class StagiMap {
     })
       .then(state => {
         const myMap = createMapBase(options.containerId, options);
-  
+
         if (options.zoomButtons) {
           addZoomButtons(myMap, options, state.locale);
         }
         addGeoButton(myMap, options, state.locale);
-      
+
         let section;
         if (options.cluster === true) {
           section = new window.ymaps.Clusterer({
@@ -42,19 +42,19 @@ export class StagiMap {
           section = myMap.geoObjects;
         }
         addPoints(myMap, options, section);
-      
+
         initSmShowPoints(myMap, options);
-      
+
         if (options.router) {
           addRoute(myMap, options);
         }
-      
+
         if (options.traffic === true) {
           new ymaps.traffic.provider.Actual({}, { infoLayerShown: true }).setMap(myMap);
         }
-      
+
         generateStyles(options.containerId);
-      
+
         initSmMoveCenter(myMap);
         ymaps.layout.storage.add();
       });

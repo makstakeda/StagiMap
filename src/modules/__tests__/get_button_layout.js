@@ -3,7 +3,7 @@
 import { getButtonLayout } from '../get_button_layout';
 
 describe('getButtonLayout', () => {
-  const expectedTemplate = 
+  const expectedTemplate =
     '<div title="{{data.title}}" class="ym-api-button" style="{{data.style}}">' +
       '<img class="my-button__img" src="{{ data.image }}" width="100%">' +
     '</div>';

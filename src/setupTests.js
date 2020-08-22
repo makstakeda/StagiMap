@@ -111,7 +111,7 @@ window.ymaps = {
     MultiRoute: class {
       constructor(config, props) {
         setPropsOnMockStorage('multiRouter.MultiRouteInstance.props', [config, props]);
-  
+
         this.model = {
           getReferencePoints: jest.fn(() => {
             setCountOnMockStorage('multiRouter.MultiRouteInstance.getReferencePoints.calls');
@@ -131,7 +131,7 @@ window.ymaps = {
         constructor(config, trafficOptions) {
           setPropsOnMockStorage('traffic.provider.ActualInstance.props', [config, trafficOptions]);
           setCountOnMockStorage('traffic.provider.ActualInstance.count');
-    
+
           this.setMap = jest.fn((map) => {
             setPropsOnMockStorage('traffic.provider.ActualInstance.setMap', [map]);
           })

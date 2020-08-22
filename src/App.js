@@ -99,8 +99,8 @@ export default class StagiMapDemo extends React.PureComponent {
             Türkçe
           </a>
         </div>
-        {`${packageInfo.name}-${packageInfo.version}`} 
+        {`${packageInfo.name}-${packageInfo.version}`}
       </div>
     );
-  } 
+  }
 }

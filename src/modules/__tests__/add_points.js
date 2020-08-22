@@ -79,7 +79,7 @@ describe('addPoints', () => {
         sizePoint: [30, 30],
         offsetPoint: [-15, 30]
       };
-  
+
       addPoints(map, { data: data.map(item => ({ ...item, ...customIcon })) }, section);
       testFlow(customIcon, false);
     });

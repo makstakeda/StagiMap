@@ -18,25 +18,21 @@ export const createInitialState = ({ apiKey, selectedLocale }) => {
   // trying to inject original script with passed parameters
   let locale;
 
-  try {
-    if (!selectedLocale || !validateLocale(selectedLocale)) {
-      locale = localeEn;
-      throw new SyntaxError(locale.langFail);
-    }
+  if (!selectedLocale || !validateLocale(selectedLocale)) {
+    locale = localeEn;
+    throw new SyntaxError(locale.langFail);
+  }
 
-    const script = document.createElement('script');
-    script.id = 'api-maps.yandex';
-    script.setAttribute('type', 'text/javascript');
-    script.setAttribute('src', `https://api-maps.yandex.ru/2.1/?lang=${selectedLocale}&apikey=${apiKey}`);
-    document.getElementsByTagName('head').item(0).appendChild(script);
+  const script = document.createElement('script');
+  script.id = 'api-maps.yandex';
+  script.setAttribute('type', 'text/javascript');
+  script.setAttribute('src', `https://api-maps.yandex.ru/2.1/?lang=${selectedLocale}&apikey=${apiKey}`);
+  document.getElementsByTagName('head').item(0).appendChild(script);
 
-    if (selectedLocale.substr(0, 2) === 'ru') {
-      locale = localeRu;
-    } else {
-      locale = localeEn;
-    }
-  } catch (e) {
-    throw e;
+  if (selectedLocale.substr(0, 2) === 'ru') {
+    locale = localeRu;
+  } else {
+    locale = localeEn;
   }
 
   return new Promise(resolve => {
