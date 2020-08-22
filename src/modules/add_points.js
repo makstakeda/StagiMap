@@ -5,7 +5,7 @@ export const addPoints = (map, options, section) => {
 
   if (!options.data) {
     return;
-  };
+  }
 
   const listener = document.querySelectorAll('[sm-point]').length !== 0;
 
@@ -33,10 +33,10 @@ export const addPoints = (map, options, section) => {
         map.setZoom(12);
         map.panTo(options.data[i].coordinates);
       });
-    };
-  };
+    }
+  }
 
   if (options.cluster) {
     map.geoObjects.add(section);
-  };
+  }
 }

@@ -24,7 +24,7 @@ export class StagiMap {
   
         if (options.zoomButtons) {
           addZoomButtons(myMap, options, state.locale);
-        };
+        }
         addGeoButton(myMap, options, state.locale);
       
         let section;
@@ -40,18 +40,18 @@ export class StagiMap {
           });
         } else {
           section = myMap.geoObjects;
-        };
+        }
         addPoints(myMap, options, section);
       
         initSmShowPoints(myMap, options);
       
         if (options.router) {
           addRoute(myMap, options);
-        };
+        }
       
         if (options.traffic === true) {
           new ymaps.traffic.provider.Actual({}, { infoLayerShown: true }).setMap(myMap);
-        };
+        }
       
         generateStyles(options.containerId);
       

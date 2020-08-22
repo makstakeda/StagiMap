@@ -20,6 +20,6 @@ export const addRoute = (map, options) => {
     for (let i = 0; i < refPoints.length; i++) {
       referencePoints.splice(-1, 0, [refPoints[i][0], refPoints[i][1]]);
       multiRoute.model.setReferencePoints(referencePoints, [1]);
-    };
-  };
+    }
+  }
 };

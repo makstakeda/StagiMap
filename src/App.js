@@ -11,7 +11,7 @@ export default class StagiMapDemo extends React.PureComponent {
     window.location.search.slice(1).split('&').forEach(queryParam => {
       if (queryParam.split('=')[0] === 'locale') {
         this.userLocale = queryParam.split('=')[1];
-      };
+      }
     });
   }
 
@@ -103,4 +103,4 @@ export default class StagiMapDemo extends React.PureComponent {
       </div>
     );
   } 
-};
+}

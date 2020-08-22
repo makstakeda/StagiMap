@@ -38,7 +38,7 @@ export const createMapBase = (containerId, smOptions) => {
       );
       tick.globalPixelCenter = [tick.globalPixelCenter[0], tick.globalPixelCenter[1] + mapSize[1] / 2];
       tick.duration = 0;
-    };
+    }
 
     if (tickBottom[0] < -TICK_LIMIT) {
       tick.globalPixelCenter = projection.toGlobalPixels(
@@ -47,7 +47,7 @@ export const createMapBase = (containerId, smOptions) => {
       );
       tick.globalPixelCenter = [tick.globalPixelCenter[0], tick.globalPixelCenter[1] - mapSize[1] / 2];
       tick.duration = 0;
-    };
+    }
 
     return tick;
   });

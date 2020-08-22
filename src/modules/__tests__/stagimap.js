@@ -33,7 +33,7 @@ describe('StagiMap', () => {
 
   test('initializes with zoom buttons', done => {
     const options = { apiKey: 'key', locale: 'en', zoomButtons: {}, containerId: 'stagimap' };
-    const instance = new StagiMap(options);
+    new StagiMap(options);
 
     setTimeout(() => {
       expect(createInitialState).toHaveBeenCalledTimes(1);
@@ -69,7 +69,7 @@ describe('StagiMap', () => {
 
   test('initializes with clustering', done => {
     const options = { apiKey: 'key', locale: 'en', cluster: true, containerId: 'stagimap' };
-    const instance = new StagiMap(options);
+    new StagiMap(options);
 
     setTimeout(() => {
       expect(createInitialState).toHaveBeenCalledTimes(1);
@@ -111,7 +111,7 @@ describe('StagiMap', () => {
 
   test('initializes with router', done => {
     const options = { apiKey: 'key', locale: 'en', router: {}, containerId: 'stagimap' };
-    const instance = new StagiMap(options);
+    new StagiMap(options);
 
     setTimeout(() => {
       expect(createInitialState).toHaveBeenCalledTimes(1);
@@ -146,7 +146,7 @@ describe('StagiMap', () => {
 
   test('initializes with traffic info', done => {
     const options = { apiKey: 'key', locale: 'en', traffic: true, containerId: 'stagimap' };
-    const instance = new StagiMap(options);
+    new StagiMap(options);
 
     setTimeout(() => {
       expect(createInitialState).toHaveBeenCalledTimes(1);

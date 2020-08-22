@@ -22,7 +22,7 @@ export const addZoomButtons = (map, options, locale) => {
     const currentZoom = map.getZoom();
     if (currentZoom === 17) {
       return;
-    };
+    }
 
     map.setZoom(currentZoom + 1);
   });
@@ -45,7 +45,7 @@ export const addZoomButtons = (map, options, locale) => {
     const currentZoom = map.getZoom();
     if (currentZoom === 0) {
       return;
-    };
+    }
 
     map.setZoom(currentZoom - 1);
   });

@@ -6,17 +6,17 @@ const setPropsOnMockStorage = (key, value) => {
     mocksStorage[key] = [value];
   } else {
     mocksStorage[key].push(value);
-  };
+  }
 };
 const setCountOnMockStorage = key => {
   if (mocksStorage[key]) {
     mocksStorage[key]++;
   } else {
     mocksStorage[key] = 1;
-  };
+  }
 }
 
-global.ymaps = {
+window.ymaps = {
   mocksStorage: {
     get: key => mocksStorage[key],
     reset: () => {
@@ -77,7 +77,7 @@ global.ymaps = {
             setPropsOnMockStorage(`GeolocationControlInstance.events.add.${method}`, [callback]);
           })
         };
-      };
+      }
     },
     Button: class {
       constructor(props) {
@@ -89,7 +89,7 @@ global.ymaps = {
             setPropsOnMockStorage(`ButtonInstance.events.add.${method}`, [callback]);
           })
         };
-      };
+      }
     }
   },
   templateLayoutFactory: {
@@ -122,7 +122,7 @@ global.ymaps = {
             setPropsOnMockStorage('multiRouter.MultiRouteInstance.setReferencePoints.props', [referencePoints, index]);
           })
         };
-      };
+      }
     }
   },
   traffic: {

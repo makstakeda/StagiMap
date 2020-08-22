@@ -1,5 +1,3 @@
-/*global ymaps*/
-
 import { initSmMoveCenter } from '../init_sm_move_center';
 
 describe('initSmMoveCenter', () => {
@@ -23,7 +21,7 @@ describe('initSmMoveCenter', () => {
     const smElement = document.getElementById(smElementId);
     if (smElement) {
       smElement.remove();
-    };
+    }
     jest.clearAllMocks();
   });
 

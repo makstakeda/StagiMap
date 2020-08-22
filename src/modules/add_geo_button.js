@@ -42,12 +42,12 @@ export const addGeoButton = (map, options, locale) => {
         );
 
         map.geoObjects.add(locationPlacemark);
-      };
+      }
 
       locationPlacemark.geometry.setCoordinates(position);
       map.panTo(position);
     });
 
     map.controls.add(geolocationControl, { position: options.geolocation.geoPosition ||  { top: 10, left: 10 } });
-  };
+  }
 };

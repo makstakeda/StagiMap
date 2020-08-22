@@ -22,7 +22,7 @@ export const createInitialState = ({ apiKey, selectedLocale }) => {
     if (!selectedLocale || !validateLocale(selectedLocale)) {
       locale = localeEn;
       throw new SyntaxError(locale.langFail);
-    };
+    }
 
     const script = document.createElement('script');
     script.id = 'api-maps.yandex';
@@ -34,17 +34,17 @@ export const createInitialState = ({ apiKey, selectedLocale }) => {
       locale = localeRu;
     } else {
       locale = localeEn;
-    };
+    }
   } catch (e) {
     throw e;
-  };
+  }
 
   return new Promise(resolve => {
     const checkScriptLoading = setInterval(() => {
       if (window.ymaps && window.ymaps.Map) {
         clearInterval(checkScriptLoading);
         resolve({ locale });
-      };
+      }
     }, 300);
   });
 };

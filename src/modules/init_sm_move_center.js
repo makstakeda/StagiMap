@@ -12,10 +12,10 @@ export const initSmMoveCenter = map => {
 
       if (isNaN(coordinates[0]) || isNaN(coordinates[1])) {
         return console.error(`"${element.getAttribute('sm-move')}" are not correct params at "sm-move" attribute`);
-      };
+      }
 
       map.setZoom(12);
       map.panTo(coordinates);
     });
-  };
+  }
 };

@@ -48,14 +48,14 @@ export const initSmShowPoints = (map, options) => {
             for (let i = 0; i < refPoints.length; i++) {
               referencePoints.splice(-1, 0, [refPoints[i][0], refPoints[i][1]]);
               multiRoute.model.setReferencePoints(referencePoints, [1]);
-            };
-          };
-        };
-      };
+            }
+          }
+        }
+      }
 
       if (!options.data) {
         return
-      };
+      }
 
       if (prop === '') {
         for (let i = 0; i < options.data.length; i++) {
@@ -73,7 +73,7 @@ export const initSmShowPoints = (map, options) => {
               balloonPanelMaxMapArea: 0
             }
           ));
-        };
+        }
       } else {
         for (let i = 0; i < options.data.length; i++) {
           if (prop === options.data[i].group) {
@@ -92,15 +92,15 @@ export const initSmShowPoints = (map, options) => {
                 balloonPanelMaxMapArea: 0
               }
             ));
-          };
-        };
-      };
+          }
+        }
+      }
 
       if (options.cluster) {
         map.geoObjects.add(section);
-      };
+      }
 
       map.setBounds(map.geoObjects.getBounds());
     });
-  };
+  }
 };

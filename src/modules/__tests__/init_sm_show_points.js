@@ -32,7 +32,7 @@ describe('initSmShowPoints', () => {
 
     if (!withRoute) {
       delete options.router;
-    };
+    }
 
     if (missedProps) {
       options.data.forEach(point => {
@@ -40,7 +40,7 @@ describe('initSmShowPoints', () => {
         delete point.sizePoint;
         delete point.offsetPoint;
       });
-    };
+    }
 
     initSmShowPoints(map, options);
     expect(map.geoObjects.removeAll).toHaveBeenCalledTimes(0);
@@ -93,7 +93,7 @@ describe('initSmShowPoints', () => {
 
       const placemarkInstance = ymaps.mocksStorage.get('ClustererInstance.add')[0][0];
       expect(placemarkInstance instanceof ymaps.Placemark).toBeTruthy();
-    };
+    }
 
     const placemarkProps = ymaps.mocksStorage.get('PlacemarkInstance.props')[0];
     expect(placemarkProps[0]).toEqual(options.data[1].coordinates);
@@ -150,7 +150,7 @@ describe('initSmShowPoints', () => {
     const smElement = document.getElementById(smElementId);
     if (smElement) {
       smElement.remove();
-    };
+    }
     ymaps.mocksStorage.reset();
     jest.clearAllMocks();
   });

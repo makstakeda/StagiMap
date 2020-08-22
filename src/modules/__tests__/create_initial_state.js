@@ -1,5 +1,3 @@
-/*global ymaps*/
-
 import { createInitialState, localeEn } from '../create_initial_state';
 
 describe('createInitialState', () => {
