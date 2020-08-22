@@ -1,7 +1,7 @@
 export const stylesTagId = 'stagimap-styles';
 
-export const generateStyles = () => {
-  const ver = document.getElementById('stagimap').children[0].getAttribute('class').slice(0, -4);
+export const generateStyles = containerId => {
+  const ver = document.getElementById(containerId).children[0].getAttribute('class').slice(0, -4);
   const styles = document.createElement('style');
   styles.id = stylesTagId;
 

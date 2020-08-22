@@ -77,6 +77,7 @@ Main parameters include geographical coordinates of the map's center, working ar
 
 Parameter                | Format                         | Description
 ------------------------ | ------------------------------ | ------------- 
+`smOptions.containerId`  | `string`                       | selects DIV element on the HTML template by ID to render the map
 `smOptions.center`       | `coordinateds`                 | sets geospatial coordinates of the map's center
 `smOptions.restrictArea` | `[coordinateds, coordinateds]` | sets the map's area with restricted borders through coordinates of left-top border point and right-bottom border point (optional)
 `smOptions.initialZoom`  | `integer`                      | sets initial zoom in range of `1 ... 16`

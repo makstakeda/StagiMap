@@ -32,7 +32,7 @@ describe('StagiMap', () => {
   });
 
   test('initializes with zoom buttons', done => {
-    const options = { apiKey: 'key', locale: 'en', zoomButtons: {} };
+    const options = { apiKey: 'key', locale: 'en', zoomButtons: {}, containerId: 'stagimap' };
     const instance = new StagiMap(options);
 
     setTimeout(() => {
@@ -68,7 +68,7 @@ describe('StagiMap', () => {
   });
 
   test('initializes with clustering', done => {
-    const options = { apiKey: 'key', locale: 'en', cluster: true };
+    const options = { apiKey: 'key', locale: 'en', cluster: true, containerId: 'stagimap' };
     const instance = new StagiMap(options);
 
     setTimeout(() => {
@@ -110,7 +110,7 @@ describe('StagiMap', () => {
   });
 
   test('initializes with router', done => {
-    const options = { apiKey: 'key', locale: 'en', router: {} };
+    const options = { apiKey: 'key', locale: 'en', router: {}, containerId: 'stagimap' };
     const instance = new StagiMap(options);
 
     setTimeout(() => {
@@ -145,7 +145,7 @@ describe('StagiMap', () => {
   });
 
   test('initializes with traffic info', done => {
-    const options = { apiKey: 'key', locale: 'en', traffic: true };
+    const options = { apiKey: 'key', locale: 'en', traffic: true, containerId: 'stagimap' };
     const instance = new StagiMap(options);
 
     setTimeout(() => {

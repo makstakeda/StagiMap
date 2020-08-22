@@ -50,7 +50,8 @@ export default class StagiMapDemo extends React.PureComponent {
     this.map = new StagiMap({
       ...smOptions,
       apiKey: '',
-      locale: demoLocales.includes(this.userLocale) ? this.userLocale : 'en'
+      locale: demoLocales.includes(this.userLocale) ? this.userLocale : 'en',
+      containerId: 'stagimap'
     });
   }
 

@@ -13,12 +13,14 @@ import { createInitialState } from './create_initial_state';
 
 export class StagiMap {
   constructor(options) {
+    this.element = document.getElementById(options.containerId);
+
     createInitialState({
       apiKey: options.apiKey,
       selectedLocale: options.locale
     })
       .then(state => {
-        const myMap = createMapBase('stagimap', options);
+        const myMap = createMapBase(options.containerId, options);
   
         if (options.zoomButtons) {
           addZoomButtons(myMap, options, state.locale);
@@ -51,7 +53,7 @@ export class StagiMap {
           new ymaps.traffic.provider.Actual({}, { infoLayerShown: true }).setMap(myMap);
         };
       
-        generateStyles();
+        generateStyles(options.containerId);
       
         initSmMoveCenter(myMap);
         ymaps.layout.storage.add();

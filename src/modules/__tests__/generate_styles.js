@@ -21,7 +21,7 @@ describe('generateStyles', () => {
   });
 
   it('generates custom styles based on version of API', () => {
-    generateStyles();
+    generateStyles('stagimap');
     const generatedStyles = document.getElementById(stylesTagId);
     expect(generatedStyles.innerHTML.includes('.ym-api-button')).toBeTruthy();
     expect(generatedStyles.innerHTML.includes(`.${mapClass.slice(0, -4)}-default-cluster`)).toBeTruthy();
